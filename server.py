@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask import url_for
 
 from dotenv import load_dotenv
@@ -39,8 +39,15 @@ def authorize():
     headers = {'Authorization': f'Bearer {bearer}'}
     print(bearer)
     response = requests.get(f"{LICHESS_HOST}/api/account", headers=headers)
-    response['token'] = bearer
-    return jsonify(**response.json())
+    error = False # Assume request was fine
+    if response.status_code == requests.codes.ALL_GOOD:
+        # all good
+        content = response.json()
+        username, url = content.get('username', None), content.get('url', None)
+        data = {'title': 'Registration Completed, please check your lichess app for scheduled games', 'content': f'{username}, {url}'}
+    else:
+        data = {'title': 'Registration Error', 'content': 'Please contact ops'}
+    return render_template('index.html', data=data)
 
 if __name__ == '__main__':
     app.run()
