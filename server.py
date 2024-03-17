@@ -2,12 +2,8 @@ import os
 from datetime import datetime
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
 import requests
 from authlib.integrations.flask_client import OAuth
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Constants
 LICHESS_HOST = os.getenv("LICHESS_HOST", "https://lichess.org")
