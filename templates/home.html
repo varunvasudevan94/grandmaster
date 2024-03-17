@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="home" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1> Game </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Game Id</th>
+                <th>White</th>
+                <th>Black</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td>{{ game.game_id }}</td>
+                <td>{{ game.white }}</td>
+                <td>{{ game.black }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
