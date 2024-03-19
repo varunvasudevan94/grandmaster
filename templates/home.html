@@ -2,27 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="home" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grandmaster Chess Tournament</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1> Game </h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Game Id</th>
-                <th>White</th>
-                <th>Black</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for game in games %}
-            <tr>
-                <td>{{ game.game_id }}</td>
-                <td>{{ game.white }}</td>
-                <td>{{ game.black }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
+    <div class="tabs">
+        <button class="tablink active" onclick="openPage('homepage')">Home</button>
+        <button class="tablink" onclick="openPage('players')">Players</button>
+    </div>
+    <div id="homepage" class="tabcontent">
+        <h2>Registrations Open</h2>
+        <a href="register">Click here to Register</a>
+    </div>
+    <div id="players" class="tabcontent">
+        <h2>Participating Players</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td><a href="{{ user.url }}">{{ user.username }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Open the first tab by default
+        document.addEventListener('DOMContentLoaded', function() {
+            openPage('homepage');
+        });
+    </script>
 </html>
