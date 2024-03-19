@@ -56,10 +56,10 @@ def home():
     all_games = Game.query.all()
     return render_template('home.html', games=all_games)
 
-@app.route('/users')
-def users():
+@app.route('/players')
+def players():
     all_users = User.query.all()
-    return render_template('users.html', users=all_users)
+    return render_template('home.html', users=all_users)
 
 @app.route('/register')
 def register():
